@@ -39,5 +39,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell!
     }
 
+    func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        return indexPath.row % 4
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return indexPath.row == 0 ? nil : indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let rowValue = movies[indexPath.row]
+        let message = "You select \(rowValue)"
+        
+        let controller = UIAlertController(
+            title: "Row Selected",
+            message: message,
+            preferredStyle: .alert)
+        
+        let action = UIAlertAction(
+            title: "Yes I Did!",
+            style: .default,
+            handler: nil)
+        
+        controller.addAction(action)
+        present(controller, animated: true, completion: nil)
+    }
 }
 
