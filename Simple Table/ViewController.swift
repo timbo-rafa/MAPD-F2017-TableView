@@ -2,10 +2,8 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    private let movies = ["Batman vs Superman", "Thor: Ragnarok", "Justice League", "Wonderwoman",
-                          "Captain America: Civil War",
-                          "Dark Tower", "Star Wars: The Last Jedi", "Blade Runner 2049"]
+    private let movies = ["Batman vs Superman", "Thor: Ragnorok", "Justice League", "Wonderwoman","Captain America: Civil War",  "Dark Tower", "Star Wars: The Last Jedi","Blade Runner 2049"]
+    
     let simpleTableIdentifier = "SimpleTableIdentifier"
     
     override func viewDidLoad() {
@@ -18,10 +16,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: simpleTableIdentifier)
-        if (cell == nil) {
-            cell = UITableViewCell(
-                style: UITableViewCellStyle.value2,
-                reuseIdentifier: simpleTableIdentifier)
+        if(cell ==  nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: simpleTableIdentifier)
         }
         
         let image = UIImage(named: "star")
@@ -29,16 +25,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let highlightedImage = UIImage(named: "star2")
         cell?.imageView?.highlightedImage = highlightedImage
         
-        if indexPath.row < 5 {
+        if indexPath.row < 5{
             cell?.detailTextLabel?.text = "Superhero Movies"
         } else {
             cell?.detailTextLabel?.text = "Sci-Fi Movies"
         }
         
         cell?.textLabel?.text = movies[indexPath.row]
+        
         return cell!
     }
-
+    
     func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         return indexPath.row % 4
     }
@@ -49,7 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let rowValue = movies[indexPath.row]
-        let message = "You select \(rowValue)"
+        let message = "You selected \(rowValue)"
         
         let controller = UIAlertController(
             title: "Row Selected",
@@ -61,8 +58,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             style: .default,
             handler: nil)
         
-        controller.addAction(action)
+        controller.addAction(action);
+        
         present(controller, animated: true, completion: nil)
+        
     }
 }
 
